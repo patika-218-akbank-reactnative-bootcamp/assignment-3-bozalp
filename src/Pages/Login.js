@@ -1,19 +1,19 @@
-import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import ThemeContext from '../Context/ThemeContext';
+
 
 const Login = ({ navigation }) => {
+
+    const {theme} = useContext(ThemeContext);
+
+
     return (
-        <View>
-            <Text>Login</Text>
-            <Button title="Login" onPress={() => 
+        <View style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+            <Text style={{ color: theme.color }}>Login</Text>
+            <Button title="Login" onPress={() =>
                 navigation.navigate("MainPage")} />
         </View>
     );
 }
-
-const styles = StyleSheet.create(
-    {
-
-    }
-);
 export default Login;

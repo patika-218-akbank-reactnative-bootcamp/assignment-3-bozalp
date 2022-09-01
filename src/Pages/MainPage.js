@@ -12,17 +12,18 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const MainPage = () => {
+
     return (
         <Tab.Navigator>
             <Tab.Screen name="Messages" component={Messages} options={{
-        headerShown: false
-      }}/>
+                headerShown: false
+            }} />
             <Tab.Screen name="Contact" component={Contact} options={{
-        headerShown: false
-      }}/>
+                headerShown: false
+            }} />
             <Tab.Screen name="SettingStack" component={SettingStack} options={{
-        headerShown: false
-      }}/>
+                headerShown: false
+            }} />
         </Tab.Navigator>
     );
 }

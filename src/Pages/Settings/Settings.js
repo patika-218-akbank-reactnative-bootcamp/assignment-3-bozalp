@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
+import ThemeContext from '../../Context/ThemeContext';
 
-const Settings = ({navigation}) => {
+const Settings = ({ navigation }) => {
+    const { theme, setTheme } = useContext(ThemeContext);
+
     return (
-        <View>
-            <Text>Settings</Text>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+            <Text style={[styles.header, { color: theme.color }]}>Settings</Text>
             <Button title="Theme" onPress={() =>
                 navigation.navigate("Theme")} />
             <Button title="Edit Profile" onPress={() =>
@@ -17,7 +20,17 @@ const Settings = ({navigation}) => {
 
 const styles = StyleSheet.create(
     {
-
+        container:
+        {
+            flex: 1,
+            padding: 10,
+        },
+        header:
+        {
+            fontSize: 18,
+            textAlign: 'center',
+            fontWeight: 'bold',
+        }
     }
 );
 export default Settings;
