@@ -11,18 +11,32 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 const MainPage = () => {
 
     return (
-        <Tab.Navigator  initialRouteName="Messages">
+        <Tab.Navigator initialRouteName="Messages">
             <Tab.Screen name="Messages" component={Messages} options={{
-                headerShown: false
+                headerShown: false,
+                tabBarLabel: 'Messages',
+                tabBarIcon: () => (
+                    <Icon name='comment' solid size={24} color={'#000'} />
+                ),
             }} />
             <Tab.Screen name="Contact" component={Contact} options={{
-                headerShown: false
+                headerShown: false,
+                tabBarLabel: 'Contact',
+                tabBarIcon: () => (
+                    <Icon name='address-book' solid size={24} color={'#000'} />
+                ),
             }} />
             <Tab.Screen name="SettingStack" component={SettingStack} options={{
-                headerShown: false
+                headerShown: false,
+                tabBarLabel: 'Settings',
+                tabBarIcon: () => (
+                    <Icon name='wrench' solid size={24} color={'#000'} />
+                ),
             }} />
         </Tab.Navigator>
     );

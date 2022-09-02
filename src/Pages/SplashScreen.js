@@ -30,7 +30,7 @@ const SplashScreen = ({ navigation }) => {
         setTimeout(() => {
             getUserData();
             //navigation.navigate("Login");
-        }, 3000);
+        }, 1000);
     }, []
     );
 

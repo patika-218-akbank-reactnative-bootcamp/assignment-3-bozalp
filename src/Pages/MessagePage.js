@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Text, View, StyleSheet, Button, Alert, TextInput, TouchableOpacity } from 'react-native';
 import ThemeContext from '../Context/ThemeContext';
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 const MessagePage = ({ navigation, route }) => {
     const { id, userName } = route.params;
     const { theme } = useContext(ThemeContext);
@@ -18,6 +20,7 @@ const MessagePage = ({ navigation, route }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+            
             <View style={styles.inner}>
                 <View style={styles.textbox_area}>
                     <TextInput
@@ -28,7 +31,7 @@ const MessagePage = ({ navigation, route }) => {
                         placeholderTextColor={theme.color}
                     />
                     <TouchableOpacity style={styles.send_button}>
-                        <Text>Send</Text>
+                    <Icon name='paper-plane' size={24} solid color={'#fff'}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -67,7 +70,9 @@ const styles = StyleSheet.create(
             height: 48,
             borderRadius:24,
             backgroundColor: '#26a5e4',
-            marginLeft:10
+            marginLeft:10,
+            alignItems:'center',
+            justifyContent:'center'
         }
     }
 );
