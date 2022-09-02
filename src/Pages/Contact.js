@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 import ThemeContext from '../Context/ThemeContext';
 
 import ContactList from '../JsonFiles/ContactList.json';
 
-const Contact = () => {
+const Contact = ({ navigation }) => {
     const { theme, setTheme } = useContext(ThemeContext);
+
+    function goToMessagePage(userId, _userName) {
+
+        navigation.navigate("MessagePage", {
+            id: userId,
+            userName: _userName
+        });
+    }
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
@@ -13,9 +21,11 @@ const Contact = () => {
             <FlatList
                 data={ContactList}
                 renderItem={({ item }) =>
-                    <TouchableOpacity activeOpacity={0.7} style={styles.button_area}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button_area}
+                        onPress={() => goToMessagePage(item.id, item.userName)}>
                         <Image source={{ uri: item.imageUrl }} style={styles.avatar} />
-                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button}
+                            onPress={() => goToMessagePage(item.id, item.userName)}>
                             <Text style={{ color: theme.color }}>{item.userName}</Text>
                         </TouchableOpacity>
                     </TouchableOpacity>
@@ -42,14 +52,14 @@ const styles = StyleSheet.create(
             width: '100%',
             height: 72,
             justifyContent: 'center',
-            textAlignVertical:'center',
-            paddingBottom:10
+            textAlignVertical: 'center',
+            paddingBottom: 10
         },
         button_area:
         {
             flex: 1,
             flexDirection: 'row',
-            marginBottom:10,
+            marginBottom: 10,
         },
         avatar:
         {
