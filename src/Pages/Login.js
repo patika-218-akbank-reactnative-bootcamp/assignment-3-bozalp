@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import ThemeContext from '../Context/ThemeContext';
 import UserContext from '../Context/UserContext';
 
 import { Picker } from '@react-native-picker/picker';
 import TextBox from '../Components/TextBox';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const Login = ({ navigation }) => {
+    
 
     const { theme } = useContext(ThemeContext);
     const { user, setUser } = useContext(UserContext);
@@ -16,6 +19,20 @@ const Login = ({ navigation }) => {
     const [lastName, setLastName] = useState(null);
     const [userName, setUserName] = useState(null);
     const [countryCode, setSelectedCountry] = useState("90");
+    
+  /*  const getTheme = async () => {
+        const value = await AsyncStorage.getItem('theme');
+        setTheme(value === null || value === 'light' ? lightTheme : darkTheme);
+        Alert.alert(value);
+        //setTheme(value === 'dark' ? darkTheme : lightTheme);
+      };
+
+      useEffect(() => {
+        setTimeout(() => {
+            getTheme();
+            Alert.alert("fffff");
+          }, 200);
+          }, []);*/
 
     function SaveAndGoNextPage() {
         const newUser = [
