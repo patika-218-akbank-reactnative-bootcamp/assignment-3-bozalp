@@ -40,12 +40,6 @@ const App = () => {
     setUser,
   }
 
-  /*const setThemeStorage = async () => {
-    await AsyncStorage.setItem('theme', theme === null ? 'light' : 'dark');
-    Alert.alert("d");
-    setTheme(theme === null || theme === 'light' ? lightTheme : darkTheme);
-  };*/
-
   const getTheme = async () => {
     const value = await AsyncStorage.getItem('theme');
     setTheme(value === null || value === 'light' ? lightTheme : darkTheme);

@@ -19,20 +19,6 @@ const Login = ({ navigation }) => {
     const [lastName, setLastName] = useState(null);
     const [userName, setUserName] = useState(null);
     const [countryCode, setSelectedCountry] = useState("90");
-    
-  /*  const getTheme = async () => {
-        const value = await AsyncStorage.getItem('theme');
-        setTheme(value === null || value === 'light' ? lightTheme : darkTheme);
-        Alert.alert(value);
-        //setTheme(value === 'dark' ? darkTheme : lightTheme);
-      };
-
-      useEffect(() => {
-        setTimeout(() => {
-            getTheme();
-            Alert.alert("fffff");
-          }, 200);
-          }, []);*/
 
     function SaveAndGoNextPage() {
         const newUser = [
@@ -43,8 +29,22 @@ const Login = ({ navigation }) => {
             user.userName = userName
         ]
         setUser(newUser);
+        setUserStorage();
         navigation.navigate("MainPage");
     }
+
+    const setUserStorage = async () => {
+        await AsyncStorage.setItem('user',
+        JSON.stringify(
+            {
+                countryCode: countryCode,
+                phoneNumber: phoneNumber,
+                firstName: firstName,
+                lastName: lastName,
+                userName: userName
+            }
+        ));
+    };
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>

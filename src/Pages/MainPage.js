@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 const MainPage = () => {
 
     return (
-        <Tab.Navigator>
+        <Tab.Navigator  initialRouteName="Messages">
             <Tab.Screen name="Messages" component={Messages} options={{
                 headerShown: false
             }} />
