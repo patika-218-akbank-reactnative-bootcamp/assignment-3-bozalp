@@ -1,7 +1,8 @@
 
-Bu projede React Native CLI ile tasarlanmıştır.
+Bu proje React Native CLI ile tasarlanmıştır.
 
 Kullanılan paketler
+
 -React Navigation 
 
 -React Native Picker
