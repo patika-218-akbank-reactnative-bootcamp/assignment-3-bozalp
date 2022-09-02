@@ -1,17 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, StyleSheet, Button, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import ThemeContext from '../Context/ThemeContext';
+import UserContext from '../Context/UserContext';
+
 import { Picker } from '@react-native-picker/picker';
 import TextBox from '../Components/TextBox';
 
 const Login = ({ navigation }) => {
 
     const { theme } = useContext(ThemeContext);
-    function onChangeNumber() {
+    const { user, setUser } = useContext(UserContext);
 
+    const [phoneNumber, setPhoneNumber] = useState(null);
+    const [firstName, setfirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+    const [userName, setUserName] = useState(null);
+    const [countryCode, setSelectedCountry] = useState("90");
+
+    function SaveAndGoNextPage() {
+        const newUser = [
+            user.countryCode = countryCode,
+            user.phoneNumber = phoneNumber,
+            user.firstName = firstName,
+            user.lastName = lastName,
+            user.userName = userName
+        ]
+        setUser(newUser);
+        navigation.navigate("MainPage");
     }
-    const [number, setNumber] = useState(null);
-    const [selectedCountry, setSelectedCountry] = useState("90");
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
@@ -19,26 +35,33 @@ const Login = ({ navigation }) => {
             <View style={{ margin: 10, }}>
                 <Text style={{ color: theme.color, paddingBottom: 30 }}>Login</Text>
                 <View style={styles.phone_number_area}>
-                    <Picker 
-                    style={{width: '40%', }}
-                    mode={'dropdown'}
-                        selectedValue={selectedCountry}
+                    <Picker
+                        style={{ width: '40%', }}
+                        mode={'dropdown'}
+                        selectedValue={countryCode}
                         onValueChange={(itemValue, itemIndex) =>
                             setSelectedCountry(itemValue)
                         }>
-                        <Picker.Item label="+90" value="90" 
-                        style={{backgroundColor:theme.backgroundColor, color: theme.color, width: '20%' }}/>
+                        <Picker.Item label="+90" value="90"
+                            style={{ backgroundColor: theme.backgroundColor, color: theme.color, width: '20%' }} />
                         <Picker.Item label="1" value="1" />
                     </Picker>
                     <View style={{ width: '60%' }}>
-                        <TextBox title="Phone Number" value={number} onChangeText={onChangeNumber} />
+                        <TextBox title="Phone Number" value={phoneNumber}
+                            onChangeText={text => setPhoneNumber(text)} numeric={true} />
                     </View>
                 </View>
-                <TextBox title="First Name" value={number} onChangeText={onChangeNumber} />
-                <TextBox title="Last Name" value={number} onChangeText={onChangeNumber} />
-                <TextBox title="User Name" value={number} onChangeText={onChangeNumber} />
-                <Button title="Login" onPress={() =>
-                    navigation.navigate("MainPage")} />
+                <TextBox title="First Name" value={firstName} onChangeText={setfirstName} />
+                <TextBox title="Last Name" value={lastName} onChangeText={setLastName} />
+                <TextBox title="User Name" value={userName} onChangeText={setUserName} />
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={[styles.button, { borderColor: theme.color, backgroundColor: '#19c790' }]}
+                    onPress={() => SaveAndGoNextPage()}>
+                    <Text style={{ color: theme.color, textAlign: 'center' }}>
+                        Login
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -61,6 +84,16 @@ const styles = StyleSheet.create(
         phone_number_area:
         {
             flexDirection: 'row',
+        },
+        button:
+        {
+            borderWidth: 1,
+            borderRadius: 5,
+            marginTop: 20,
+            height: 50,
+            width: '80%',
+            justifyContent: 'center',
+            alignSelf: 'center'
         }
     }
 );
